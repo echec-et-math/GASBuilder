@@ -10,10 +10,10 @@ open Ast
 input : x= expression EOF {x}
 
 expression :
-y= abstring C z = abstring {Expr(y,'c',z)}
+y= abstring C z = abstring {Expr(y,"c",z)}
 
 abstring :
-A s = abstring {Concat('a',s)}
-|B s= abstring {Concat('b',s)}
-|s=A {Var(s)}
-|s=B {Var(s)}
+t=A s = abstring {Concat(Var("a"),s)}
+|t=B s= abstring {Concat(Var("b"),s)}
+|s=A {Var("a")}
+|s=B {Var("a")}
