@@ -1,62 +1,114 @@
 State 0:
+## Known stack suffix:
+##
+## LR(1) items:
 input' -> . input [ # ]
--- On B shift to state 1
--- On A shift to state 2
--- On input shift to state 5
--- On expression shift to state 6
--- On abstring shift to state 8
+## Transitions:
+-- On C shift to state 1
+-- On B shift to state 2
+-- On A shift to state 3
+-- On input shift to state 8
+-- On expression shift to state 9
+## Reductions:
 
 State 1:
-abstring -> B . abstring [ EOF C ]
-abstring -> B . [ EOF C ]
--- On B shift to state 1
--- On A shift to state 2
--- On abstring shift to state 4
--- On EOF reduce production abstring -> B 
--- On C reduce production abstring -> B 
+## Known stack suffix:
+## C
+## LR(1) items:
+expression -> C . [ EOF B A ]
+## Transitions:
+## Reductions:
+-- On EOF B A
+--   reduce production expression -> C
 
 State 2:
-abstring -> A . abstring [ EOF C ]
-abstring -> A . [ EOF C ]
--- On B shift to state 1
--- On A shift to state 2
--- On abstring shift to state 3
--- On EOF reduce production abstring -> A 
--- On C reduce production abstring -> A 
+## Known stack suffix:
+## B
+## LR(1) items:
+expression -> B . expression B [ EOF B A ]
+## Transitions:
+-- On C shift to state 1
+-- On B shift to state 2
+-- On A shift to state 3
+-- On expression shift to state 6
+## Reductions:
 
 State 3:
-abstring -> A abstring . [ EOF C ]
--- On EOF reduce production abstring -> A abstring 
--- On C reduce production abstring -> A abstring 
+## Known stack suffix:
+## A
+## LR(1) items:
+expression -> A . expression A [ EOF B A ]
+## Transitions:
+-- On C shift to state 1
+-- On B shift to state 2
+-- On A shift to state 3
+-- On expression shift to state 4
+## Reductions:
 
 State 4:
-abstring -> B abstring . [ EOF C ]
--- On EOF reduce production abstring -> B abstring 
--- On C reduce production abstring -> B abstring 
+## Known stack suffix:
+## A expression
+## LR(1) items:
+expression -> A expression . A [ EOF B A ]
+## Transitions:
+-- On A shift to state 5
+## Reductions:
 
 State 5:
-input' -> input . [ # ]
--- On # accept input
+## Known stack suffix:
+## A expression A
+## LR(1) items:
+expression -> A expression A . [ EOF B A ]
+## Transitions:
+## Reductions:
+-- On EOF B A
+--   reduce production expression -> A expression A
 
 State 6:
-input -> expression . EOF [ # ]
--- On EOF shift to state 7
+## Known stack suffix:
+## B expression
+## LR(1) items:
+expression -> B expression . B [ EOF B A ]
+## Transitions:
+-- On B shift to state 7
+## Reductions:
 
 State 7:
-input -> expression EOF . [ # ]
--- On # reduce production input -> expression EOF 
+## Known stack suffix:
+## B expression B
+## LR(1) items:
+expression -> B expression B . [ EOF B A ]
+## Transitions:
+## Reductions:
+-- On EOF B A
+--   reduce production expression -> B expression B
 
 State 8:
-expression -> abstring . C abstring [ EOF ]
--- On C shift to state 9
+## Known stack suffix:
+## input
+## LR(1) items:
+input' -> input . [ # ]
+## Transitions:
+## Reductions:
+-- On #
+--   accept input
 
 State 9:
-expression -> abstring C . abstring [ EOF ]
--- On B shift to state 1
--- On A shift to state 2
--- On abstring shift to state 10
+## Known stack suffix:
+## expression
+## LR(1) items:
+input -> expression . EOF [ # ]
+## Transitions:
+-- On EOF shift to state 10
+## Reductions:
 
 State 10:
-expression -> abstring C abstring . [ EOF ]
--- On EOF reduce production expression -> abstring C abstring 
+## Known stack suffix:
+## expression EOF
+## LR(1) items:
+input -> expression EOF . [ # ]
+## Transitions:
+## Reductions:
+-- On #
+--   reduce production input -> expression EOF
 
