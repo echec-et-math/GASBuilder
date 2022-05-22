@@ -8,7 +8,7 @@ open Ast
 %%
 
 automate:
-    declarations (* transitions *) EOF {"rien"}
+    declarations transitions  EOF {"rien"}
 
 declarations:
     inputsymbols stacksymbols states initialstate initialstack {}
