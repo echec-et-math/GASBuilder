@@ -2,14 +2,54 @@
 open Ast
 %}
 
-%token A B C EOF
+%token AUTOMATE DECLARATIONS TRANSITIONS INPUTSYMBOLS STACKSYMBOLS STATES INITIALSTATE INITIALSTACK SUITELETTRES_NONVIDE TRANSLIST TRANSITION LETTRE_OU_VIDE NONEMPTYSTACK
 %start<string> input
 
 %%
 
-input : x=expression EOF {x}
+AUTOMATE:
+    DECLARATIONS TRANSITIONS
 
-expression :
-A x=expression A {"a" ^ x ^ "a"}
-| B x=expression B {"b" ^ x ^ "b"}
-| C {"c"}
+DECLARATIONS:
+    INPUTSYMBOLS STACKSYMBOLS STATES INITIALSTATE INITIALSTACK
+
+INPUTSYMBOLS:
+    input symbols: SUITELETTRES_NONVIDE
+
+STACKSYMBOLS:
+    stack symbols: SUITELETTRES_NONVIDE
+
+STATES:
+    states: SUITELETTRES_NONVIDE
+
+INITIALSTATE:
+    initial state: lettre
+
+INITIALSTACK:
+    initial stack symbol: lettre
+
+SUITELETTRES_NONVIDE:
+    lettre
+    | lettre , suitelettres_NONVIDE
+
+TRANSITIONS: 
+    transitions: TRANSLIST
+
+TRANSLIST:
+    epsilon
+    | TRANSITION TRANSLIST
+
+TRANSITION:
+    ( lettre , LETTRE_OU_VIDE , lettre , lettre , STACK )
+
+LETTRE_OU_VIDE:
+    epsilon
+    | lettre
+
+STACK:
+    epsilon
+    | NONEMPTYSTACK
+
+NONEMPTYSTACK:
+    lettre
+    | lettre ; NONEMPTYSTACK
