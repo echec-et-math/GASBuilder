@@ -2,54 +2,54 @@
 open Ast
 %}
 
-%token AUTOMATE DECLARATIONS TRANSITIONS INPUTSYMBOLS STACKSYMBOLS STATES INITIALSTATE INITIALSTACK SUITELETTRES_NONVIDE TRANSLIST TRANSITION LETTRE_OU_VIDE NONEMPTYSTACK
-%start<string> input
+%token INPUT_SYMBOLS_HEADER STACK_SYMBOLS_HEADER STATES_HEADER INIT_STATE_HEADER INIT_STACK_HEADER TRANSITIONS_HEADER LPARA RPARA COMMA SEMICOLON EPSILON LETTRE EOF
+%start<string> automate
 
 %%
 
-AUTOMATE:
-    DECLARATIONS TRANSITIONS
+automate:
+    declarations (* transitions *) EOF {"rien"}
 
-DECLARATIONS:
-    INPUTSYMBOLS STACKSYMBOLS STATES INITIALSTATE INITIALSTACK
+declarations:
+    inputsymbols stacksymbols states initialstate initialstack {}
 
-INPUTSYMBOLS:
-    input symbols: SUITELETTRES_NONVIDE
+inputsymbols:
+    INPUT_SYMBOLS_HEADER suitelettres_nonvide {}
 
-STACKSYMBOLS:
-    stack symbols: SUITELETTRES_NONVIDE
+stacksymbols:
+    STACK_SYMBOLS_HEADER suitelettres_nonvide {}
 
-STATES:
-    states: SUITELETTRES_NONVIDE
+states:
+    STATES_HEADER suitelettres_nonvide {}
 
-INITIALSTATE:
-    initial state: lettre
+initialstate:
+    INIT_STATE_HEADER LETTRE {}
 
-INITIALSTACK:
-    initial stack symbol: lettre
+initialstack:
+    INIT_STACK_HEADER LETTRE {}
 
-SUITELETTRES_NONVIDE:
-    lettre
-    | lettre , suitelettres_NONVIDE
+suitelettres_nonvide:
+    LETTRE {}
+    | LETTRE COMMA suitelettres_nonvide {}
 
-TRANSITIONS: 
-    transitions: TRANSLIST
+transitions: 
+    TRANSITIONS_HEADER translist {}
 
-TRANSLIST:
-    epsilon
-    | TRANSITION TRANSLIST
+translist:
+    EPSILON {}
+    | transition translist {}
 
-TRANSITION:
-    ( lettre , LETTRE_OU_VIDE , lettre , lettre , STACK )
+transition:
+    LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA stack RPARA {}
 
-LETTRE_OU_VIDE:
-    epsilon
-    | lettre
+lettre_ou_vide:
+    EPSILON {}
+    | LETTRE {}
 
-STACK:
-    epsilon
-    | NONEMPTYSTACK
+stack:
+    EPSILON {}
+    | nonemptystack {}
 
-NONEMPTYSTACK:
-    lettre
-    | lettre ; NONEMPTYSTACK
+nonemptystack:
+    LETTRE {}
+    | LETTRE SEMICOLON nonemptystack {}
