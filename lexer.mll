@@ -16,6 +16,7 @@ rule main = parse
   | "initial stack symbol : " {INIT_STACK_HEADER}
   | "transitions : " {TRANSITIONS_HEADER}
   | ',' {COMMA}
+  | ", " {COMMA}
   | ';' {SEMICOLON}
   | '(' {LPARA}
   | ')' {RPARA}
