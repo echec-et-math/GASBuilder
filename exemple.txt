@@ -3,5 +3,5 @@ stack symbols : A, B, C, Z
 states : 1, 2
 initial state : 1
 initial stack symbol : Z
-transitions : 
+transitions:
 (1,a,Z,1,Z;A)
