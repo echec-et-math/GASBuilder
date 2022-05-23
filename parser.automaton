@@ -3,7 +3,7 @@ automate' -> . automate [ # ]
 -- On INPUT_SYMBOLS_HEADER shift to state 1
 -- On inputsymbols shift to state 6
 -- On declarations shift to state 19
--- On automate shift to state 45
+-- On automate shift to state 42
 
 State 1:
 inputsymbols -> INPUT_SYMBOLS_HEADER . suitelettres_nonvide [ STACK_SYMBOLS_HEADER ]
@@ -94,124 +94,112 @@ declarations -> inputsymbols stacksymbols states initialstate initialstack . [ T
 State 19:
 automate -> declarations . transitions EOF [ # ]
 -- On TRANSITIONS_HEADER shift to state 20
--- On transitions shift to state 43
+-- On transitions shift to state 40
 
 State 20:
 transitions -> TRANSITIONS_HEADER . translist [ EOF ]
 -- On LPARA shift to state 21
--- On EPSILON shift to state 39
--- On translist shift to state 40
--- On transition shift to state 41
+-- On translist shift to state 37
+-- On transition shift to state 38
+-- On EOF reduce production translist -> 
 
 State 21:
-transition -> LPARA . LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA stack RPARA [ LPARA EPSILON ]
+transition -> LPARA . LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA stack RPARA [ LPARA EOF ]
 -- On LETTRE shift to state 22
 
 State 22:
-transition -> LPARA LETTRE . COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA stack RPARA [ LPARA EPSILON ]
+transition -> LPARA LETTRE . COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA stack RPARA [ LPARA EOF ]
 -- On COMMA shift to state 23
 
 State 23:
-transition -> LPARA LETTRE COMMA . lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA stack RPARA [ LPARA EPSILON ]
+transition -> LPARA LETTRE COMMA . lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA stack RPARA [ LPARA EOF ]
 -- On LETTRE shift to state 24
--- On EPSILON shift to state 25
--- On lettre_ou_vide shift to state 26
+-- On lettre_ou_vide shift to state 25
+-- On COMMA reduce production lettre_ou_vide -> 
 
 State 24:
 lettre_ou_vide -> LETTRE . [ COMMA ]
 -- On COMMA reduce production lettre_ou_vide -> LETTRE 
 
 State 25:
-lettre_ou_vide -> EPSILON . [ COMMA ]
--- On COMMA reduce production lettre_ou_vide -> EPSILON 
+transition -> LPARA LETTRE COMMA lettre_ou_vide . COMMA LETTRE COMMA LETTRE COMMA stack RPARA [ LPARA EOF ]
+-- On COMMA shift to state 26
 
 State 26:
-transition -> LPARA LETTRE COMMA lettre_ou_vide . COMMA LETTRE COMMA LETTRE COMMA stack RPARA [ LPARA EPSILON ]
--- On COMMA shift to state 27
+transition -> LPARA LETTRE COMMA lettre_ou_vide COMMA . LETTRE COMMA LETTRE COMMA stack RPARA [ LPARA EOF ]
+-- On LETTRE shift to state 27
 
 State 27:
-transition -> LPARA LETTRE COMMA lettre_ou_vide COMMA . LETTRE COMMA LETTRE COMMA stack RPARA [ LPARA EPSILON ]
--- On LETTRE shift to state 28
+transition -> LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE . COMMA LETTRE COMMA stack RPARA [ LPARA EOF ]
+-- On COMMA shift to state 28
 
 State 28:
-transition -> LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE . COMMA LETTRE COMMA stack RPARA [ LPARA EPSILON ]
--- On COMMA shift to state 29
+transition -> LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA . LETTRE COMMA stack RPARA [ LPARA EOF ]
+-- On LETTRE shift to state 29
 
 State 29:
-transition -> LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA . LETTRE COMMA stack RPARA [ LPARA EPSILON ]
--- On LETTRE shift to state 30
+transition -> LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE . COMMA stack RPARA [ LPARA EOF ]
+-- On COMMA shift to state 30
 
 State 30:
-transition -> LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE . COMMA stack RPARA [ LPARA EPSILON ]
--- On COMMA shift to state 31
+transition -> LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA . stack RPARA [ LPARA EOF ]
+-- On LETTRE shift to state 31
+-- On stack shift to state 34
+-- On nonemptystack shift to state 36
+-- On RPARA reduce production stack -> 
 
 State 31:
-transition -> LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA . stack RPARA [ LPARA EPSILON ]
--- On LETTRE shift to state 32
--- On EPSILON shift to state 35
--- On stack shift to state 36
--- On nonemptystack shift to state 38
-
-State 32:
 nonemptystack -> LETTRE . [ RPARA ]
 nonemptystack -> LETTRE . SEMICOLON nonemptystack [ RPARA ]
--- On SEMICOLON shift to state 33
+-- On SEMICOLON shift to state 32
 -- On RPARA reduce production nonemptystack -> LETTRE 
 
-State 33:
+State 32:
 nonemptystack -> LETTRE SEMICOLON . nonemptystack [ RPARA ]
--- On LETTRE shift to state 32
--- On nonemptystack shift to state 34
+-- On LETTRE shift to state 31
+-- On nonemptystack shift to state 33
 
-State 34:
+State 33:
 nonemptystack -> LETTRE SEMICOLON nonemptystack . [ RPARA ]
 -- On RPARA reduce production nonemptystack -> LETTRE SEMICOLON nonemptystack 
 
+State 34:
+transition -> LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA stack . RPARA [ LPARA EOF ]
+-- On RPARA shift to state 35
+
 State 35:
-stack -> EPSILON . [ RPARA ]
--- On RPARA reduce production stack -> EPSILON 
+transition -> LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA stack RPARA . [ LPARA EOF ]
+-- On LPARA reduce production transition -> LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA stack RPARA 
+-- On EOF reduce production transition -> LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA stack RPARA 
 
 State 36:
-transition -> LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA stack . RPARA [ LPARA EPSILON ]
--- On RPARA shift to state 37
-
-State 37:
-transition -> LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA stack RPARA . [ LPARA EPSILON ]
--- On LPARA reduce production transition -> LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA stack RPARA 
--- On EPSILON reduce production transition -> LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA stack RPARA 
-
-State 38:
 stack -> nonemptystack . [ RPARA ]
 -- On RPARA reduce production stack -> nonemptystack 
 
-State 39:
-translist -> EPSILON . [ EOF ]
--- On EOF reduce production translist -> EPSILON 
-
-State 40:
+State 37:
 transitions -> TRANSITIONS_HEADER translist . [ EOF ]
 -- On EOF reduce production transitions -> TRANSITIONS_HEADER translist 
 
-State 41:
+State 38:
 translist -> transition . translist [ EOF ]
 -- On LPARA shift to state 21
--- On EPSILON shift to state 39
--- On translist shift to state 42
--- On transition shift to state 41
+-- On translist shift to state 39
+-- On transition shift to state 38
+-- On EOF reduce production translist -> 
 
-State 42:
+State 39:
 translist -> transition translist . [ EOF ]
 -- On EOF reduce production translist -> transition translist 
 
-State 43:
+State 40:
 automate -> declarations transitions . EOF [ # ]
--- On EOF shift to state 44
+-- On EOF shift to state 41
 
-State 44:
+State 41:
 automate -> declarations transitions EOF . [ # ]
 -- On # reduce production automate -> declarations transitions EOF 
 
-State 45:
+State 42:
 automate' -> automate . [ # ]
 -- On # accept automate
 

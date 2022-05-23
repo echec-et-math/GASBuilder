@@ -21,5 +21,4 @@ rule main = parse
   | '(' {LPARA}
   | ')' {RPARA}
   | eof {EOF}
-  | "" {EPSILON}
   |_ {failwith "unexpected character"} 
