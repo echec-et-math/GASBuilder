@@ -2,7 +2,7 @@
 open Ast
 %}
 
-%token INPUT_SYMBOLS_HEADER STACK_SYMBOLS_HEADER STATES_HEADER INIT_STATE_HEADER INIT_STACK_HEADER TRANSITIONS_HEADER LPARA RPARA COMMA SEMICOLON EPSILON LETTRE EOF
+%token INPUT_SYMBOLS_HEADER STACK_SYMBOLS_HEADER STATES_HEADER INIT_STATE_HEADER INIT_STACK_HEADER TRANSITIONS_HEADER LPARA RPARA COMMA SEMICOLON LETTRE EOF COLON
 %start<string> automate
 
 %%
@@ -14,26 +14,26 @@ declarations:
     inputsymbols stacksymbols states initialstate initialstack {}
 
 inputsymbols:
-    INPUT_SYMBOLS_HEADER suitelettres_nonvide {}
+    INPUT_SYMBOLS_HEADER COLON suitelettres_nonvide {}
 
 stacksymbols:
-    STACK_SYMBOLS_HEADER suitelettres_nonvide {}
+    STACK_SYMBOLS_HEADER COLON suitelettres_nonvide {}
 
 states:
-    STATES_HEADER suitelettres_nonvide {}
+    STATES_HEADER COLON suitelettres_nonvide {}
 
 initialstate:
-    INIT_STATE_HEADER LETTRE {}
+    INIT_STATE_HEADER COLON LETTRE {}
 
 initialstack:
-    INIT_STACK_HEADER LETTRE {}
+    INIT_STACK_HEADER COLON LETTRE {}
 
 suitelettres_nonvide:
     LETTRE {}
     | LETTRE COMMA suitelettres_nonvide {}
 
 transitions: 
-    TRANSITIONS_HEADER translist {}
+    TRANSITIONS_HEADER COLON translist {}
 
 translist:
      {}
