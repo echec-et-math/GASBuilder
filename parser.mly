@@ -8,7 +8,7 @@ open Ast
 %%
 
 automate:
-    declarations transitions  EOF {"rien"}
+    declarations transitions EOF {"rien"}
 
 declarations:
     inputsymbols stacksymbols states initialstate initialstack {}
@@ -36,18 +36,18 @@ transitions:
     TRANSITIONS_HEADER translist {}
 
 translist:
-    EPSILON {}
+     {}
     | transition translist {}
 
 transition:
     LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA stack RPARA {}
 
 lettre_ou_vide:
-    EPSILON {}
+     {}
     | LETTRE {}
 
 stack:
-    EPSILON {}
+      {}
     | nonemptystack {}
 
 nonemptystack:
