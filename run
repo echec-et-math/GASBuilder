@@ -1,0 +1,9 @@
+#!/bin/sh
+if [ "$#" -ne 1 ]; then
+    echo "Usage : ./run <file_name without extension nor path>"
+    echo "Exemple MUST be located in the exemples/ folder and have a .exp extension"
+    exit 2
+else
+    make
+    ./parser < exemples/${1}.exp
+fi
