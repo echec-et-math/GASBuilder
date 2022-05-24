@@ -2,54 +2,66 @@
 open Ast
 %}
 
-%token INPUT_SYMBOLS_HEADER STACK_SYMBOLS_HEADER STATES_HEADER INIT_STATE_HEADER INIT_STACK_HEADER TRANSITIONS_HEADER LPARA RPARA COMMA SEMICOLON LETTRE EOF COLON
-%start<string> automate
+%token INPUT_SYMBOLS_HEADER STACK_SYMBOLS_HEADER STATES_HEADER INIT_STATE_HEADER INIT_STACK_HEADER TRANSITIONS_HEADER
+%token LPARA RPARA COMMA SEMICOLON EOF COLON
+%token<int> DIGIT
+%token<char> UC_LETTER LC_LETTER 
+
+%start<Ast.automaton> automate (* Unit type if the automaton is run *)
 
 %%
 
 automate:
-    declarations transitions EOF {"rien"}
+    decl=declarations tr_list=transitions EOF {build_automaton decl tr_list} (* We need to run it now *)
 
 declarations:
-    inputsymbols stacksymbols states initialstate initialstack {}
+    a=inputsymbols b=stacksymbols c=states d=initialstate e=initialstack {(a, b, c, d, e)}
 
 inputsymbols:
-    INPUT_SYMBOLS_HEADER COLON suitelettres_nonvide {}
+    INPUT_SYMBOLS_HEADER COLON input_symbs=suite_min_nonvide {input_symbs}
 
 stacksymbols:
-    STACK_SYMBOLS_HEADER COLON suitelettres_nonvide {}
+    STACK_SYMBOLS_HEADER COLON stack_symbs=suite_maj_nonvide {stack_symbs}
 
 states:
-    STATES_HEADER COLON suitelettres_nonvide {}
+    STATES_HEADER COLON state_symbs=suite_chiffres_nonvide {state_symbs}
 
 initialstate:
-    INIT_STATE_HEADER COLON LETTRE {}
+    INIT_STATE_HEADER COLON x=DIGIT {x}
 
 initialstack:
-    INIT_STACK_HEADER COLON LETTRE {}
+    INIT_STACK_HEADER COLON x=UC_LETTER {x}
 
-suitelettres_nonvide:
-    LETTRE {}
-    | LETTRE COMMA suitelettres_nonvide {}
+suite_min_nonvide:
+    x=LC_LETTER {[x]}
+    | x=LC_LETTER COMMA y=suite_min_nonvide {x::y}
+
+suite_maj_nonvide:
+    x=UC_LETTER {[x]}
+    | x=UC_LETTER COMMA y=suite_maj_nonvide {x::y}
+
+suite_chiffres_nonvide:
+    x=DIGIT {[x]}
+    | x=DIGIT COMMA y=suite_chiffres_nonvide {x::y}
 
 transitions: 
-    TRANSITIONS_HEADER COLON translist {}
+    TRANSITIONS_HEADER COLON t=translist {t}
 
 translist:
-     {}
-    | transition translist {}
+     {[]}
+    | t=transition q=translist {t::q}
 
 transition:
-    LPARA LETTRE COMMA lettre_ou_vide COMMA LETTRE COMMA LETTRE COMMA stack RPARA {}
+    LPARA a=DIGIT COMMA b=minuscule_ou_vide COMMA c=UC_LETTER COMMA d=DIGIT COMMA e=stack RPARA {(a, b, c, d, e)}
 
-lettre_ou_vide:
-     {}
-    | LETTRE {}
+minuscule_ou_vide:
+     {'&'} (* This will be our representation for epsilon *)
+    | x=LC_LETTER {x}
 
 stack:
-      {}
-    | nonemptystack {}
+      {[]}
+    | s=nonemptystack {s}
 
 nonemptystack:
-    LETTRE {}
-    | LETTRE SEMICOLON nonemptystack {}
+    x=UC_LETTER {[x]}
+    | x=UC_LETTER SEMICOLON y=nonemptystack {x::y}
