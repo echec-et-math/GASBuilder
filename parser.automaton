@@ -2,12 +2,12 @@ State 0:
 ## Known stack suffix:
 ##
 ## LR(1) items:
-automate' -> . automate [ # ]
+automaton' -> . automaton [ # ]
 ## Transitions:
 -- On INPUT_SYMBOLS_HEADER shift to state 1
 -- On inputsymbols shift to state 7
 -- On declarations shift to state 30
--- On automate shift to state 54
+-- On automaton shift to state 54
 ## Reductions:
 
 State 1:
@@ -303,7 +303,7 @@ State 30:
 ## Known stack suffix:
 ## declarations
 ## LR(1) items:
-automate -> declarations . transitions EOF [ # ]
+automaton -> declarations . transitions EOF [ # ]
 ## Transitions:
 -- On TRANSITIONS_HEADER shift to state 31
 -- On transitions shift to state 52
@@ -527,7 +527,7 @@ State 52:
 ## Known stack suffix:
 ## declarations transitions
 ## LR(1) items:
-automate -> declarations transitions . EOF [ # ]
+automaton -> declarations transitions . EOF [ # ]
 ## Transitions:
 -- On EOF shift to state 53
 ## Reductions:
@@ -536,19 +536,19 @@ State 53:
 ## Known stack suffix:
 ## declarations transitions EOF
 ## LR(1) items:
-automate -> declarations transitions EOF . [ # ]
+automaton -> declarations transitions EOF . [ # ]
 ## Transitions:
 ## Reductions:
 -- On #
---   reduce production automate -> declarations transitions EOF
+--   reduce production automaton -> declarations transitions EOF
 
 State 54:
 ## Known stack suffix:
-## automate
+## automaton
 ## LR(1) items:
-automate' -> automate . [ # ]
+automaton' -> automaton . [ # ]
 ## Transitions:
 ## Reductions:
 -- On #
---   accept automate
+--   accept automaton
 

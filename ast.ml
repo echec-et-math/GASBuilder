@@ -38,32 +38,40 @@ exception UndeterministicConflict of transition * transition
 
 let check_conflict declarations transitions = ();; (* TODO *)
 
+let rec stack_to_string stack = match stack with
+  | [] -> ""
+  | t::q -> (Char.escaped t) ^ (stack_to_string q);;
+
 let build_automaton (declarations:declarations) (transitions:transitions) =
   let (inputsymbols, stacksymbols, states, initstate, initstack) = declarations in
   let apply_tr cur_state read_symbol cur_stack_top =
-    let rec aux_apply tr_list = match tr_list with (* TODO : allow epsilon_transitions with '' as the character read *)
-      | [] -> raise (NoSuchTransition(cur_state, read_symbol, cur_stack_top))
+    let rec aux_apply tr_list = match tr_list with
+      | [] -> 
+        if read_symbol = '&' (* Check for epsilon *)
+        then (0, []) (* Zero state and empty stack top is our code for non-existing epsilon-transition and is not an error. *)
+        else raise (NoSuchTransition(cur_state, read_symbol, cur_stack_top)) (* Non-existing regular transition is still an error, though. *)
       | t::q -> match t with
-        | (a, b, c, d, e) when a = cur_state && b = read_symbol && c = cur_stack_top -> (d, (List.rev e))
+        | (a, b, c, d, e) when a = cur_state && b = read_symbol && c = cur_stack_top ->
+          print_endline ("CURRENT STATE : " ^ (string_of_int cur_state) ^ " READING " ^ (Char.escaped read_symbol) ^ " FROM STREAM AND " ^ (Char.escaped cur_stack_top) ^ " FROM STACK");
+          print_endline ("SWITCHING TO STATE " ^ (string_of_int d) ^ " AND " ^ (match e with
+            | [] -> "CONSUMING THE STACK"
+            | [t] -> if t=cur_stack_top then "KEEPING STACK TOP SYMBOL " else "CHANGING STACK TOP SYMBOL TO " ^ (Char.escaped t)
+            | _ -> "OVERWRITING " ^ (stack_to_string (List.rev e)) ^ " ON STACK"));
+          (d, (List.rev e))
         (* Reversing the stack because in the file, it's written from tail to head *)
         | _ -> aux_apply q in
     aux_apply transitions in
   let rec aux_builder state stack stream = match (stream, stack) with
     | [], [] -> ()
     | t::q, [] -> raise (NonEmptyStream)
-    | [], t::q -> raise (NonEmptyStack)
-    | r::s, t::q -> let (new_state, new_stack_top) = (apply_tr state r t) in aux_builder new_state (new_stack_top@q) s in
+    | [], t::q -> (let (new_state, new_stack_top) = match (apply_tr state '&' t) with (* If the input stream is empty, only an epsilon transition can save us *)
+      | (0, []) -> raise (NonEmptyStack) (* No epsilon-transition found *)
+      | n_s, n_s_t -> n_s, n_s_t (* If a match is found, just keep it *) in
+    aux_builder new_state (new_stack_top@q) [])
+    | r::s, t::q -> let (new_state, new_stack_top) = match (apply_tr state '&' t) with (* Always try an epsilon transition first, you never know *) 
+      (* Note : this means that epsilon-transitions are always prioritary, no matter what.
+      Thus, checking if the automaton is deterministic is a must, since it could lead to terrible assumptions. *)
+    | (0, []) -> (apply_tr state r t) (* It didn't work, try again with the actual character *)
+      | n_s, n_s_t -> n_s, n_s_t (* If a match is found, just keep it *) in
+    aux_builder new_state (new_stack_top@q) s in
   aux_builder initstate [initstack];;
-
-let run_automaton automaton =
-  print_string "Enter a word : ";
-  let word = read_line () in (* WE NEED A BLOCKING READ HERE *)
-  let stream = List.init (String.length word) (String.get word) in
-  try
-    automaton stream
-  with e -> match e with
-    | NonEmptyStream -> print_endline "Word non accepted : Stack emptied before full consumation of input stream."
-    | NonEmptyStack -> print_endline "Word non accepted : Stack non empty upon full consumation of input stream."
-    | NoSuchTransition(cur_state, read_symbol, cur_stack_top) ->
-        print_endline ("Word non accepted : could not find a transition from state " ^ (string_of_int cur_state) ^ "reading character " ^ (Char.escaped read_symbol) ^ " with stack symbol " ^ (Char.escaped cur_stack_top) ^ " on top of the stack.")
-    | _ -> raise e;;

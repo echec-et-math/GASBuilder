@@ -7,11 +7,11 @@ open Ast
 %token<int> DIGIT
 %token<char> UC_LETTER LC_LETTER 
 
-%start<Ast.automaton> automate (* Unit type if the automaton is run *)
+%start<Ast.automaton> automaton (* Unit type if the automaton is run *)
 
 %%
 
-automate:
+automaton:
     decl=declarations tr_list=transitions EOF {build_automaton decl tr_list} (* We need to run it now *)
 
 declarations:

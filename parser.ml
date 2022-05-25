@@ -208,14 +208,14 @@ and _menhir_goto_translist : _menhir_env -> 'ttv_tail -> _menhir_state -> (Ast.t
             let _menhir_stack = Obj.magic _menhir_stack in
             let _menhir_stack = Obj.magic _menhir_stack in
             let ((_menhir_stack, (decl : (Ast.declarations))), (tr_list : (Ast.transitions))) = _menhir_stack in
-            let _v : (unit) = 
+            let _v : (Ast.automaton) = 
 # 15 "parser.mly"
-                                              (run_automaton (build_automaton decl tr_list))
+                                              (build_automaton decl tr_list)
 # 215 "parser.ml"
              in
             let _menhir_stack = Obj.magic _menhir_stack in
             let _menhir_stack = Obj.magic _menhir_stack in
-            let (_1 : (unit)) = _v in
+            let (_1 : (Ast.automaton)) = _v in
             Obj.magic _1
         | _ ->
             assert (not _menhir_env._menhir_error);
@@ -846,7 +846,7 @@ and _menhir_discard : _menhir_env -> _menhir_env =
       _menhir_error = false;
     }
 
-and automate : (Lexing.lexbuf -> token) -> Lexing.lexbuf -> (unit) =
+and automaton : (Lexing.lexbuf -> token) -> Lexing.lexbuf -> (Ast.automaton) =
   fun lexer lexbuf ->
     let _menhir_env = {
       _menhir_lexer = lexer;
