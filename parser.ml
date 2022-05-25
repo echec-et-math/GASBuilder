@@ -3,14 +3,11 @@ module MenhirBasics = struct
   
   exception Error
   
-  let _eRR : exn =
-    Error
-  
   type token = 
     | UC_LETTER of (
 # 8 "parser.mly"
       (char)
-# 14 "parser.ml"
+# 11 "parser.ml"
   )
     | TRANSITIONS_HEADER
     | STATES_HEADER
@@ -21,7 +18,7 @@ module MenhirBasics = struct
     | LC_LETTER of (
 # 8 "parser.mly"
       (char)
-# 25 "parser.ml"
+# 22 "parser.ml"
   )
     | INPUT_SYMBOLS_HEADER
     | INIT_STATE_HEADER
@@ -30,7 +27,7 @@ module MenhirBasics = struct
     | DIGIT of (
 # 7 "parser.mly"
       (int)
-# 34 "parser.ml"
+# 31 "parser.ml"
   )
     | COMMA
     | COLON
@@ -38,6 +35,9 @@ module MenhirBasics = struct
 end
 
 include MenhirBasics
+
+let _eRR =
+  MenhirBasics.Error
 
 type _menhir_env = {
   _menhir_lexer: Lexing.lexbuf -> token;
@@ -64,8 +64,6 @@ open Ast
 
 # 66 "parser.ml"
 
-[@@@ocaml.warning "-4-39"]
-
 let rec _menhir_goto_nonemptystack : _menhir_env -> 'ttv_tail -> _menhir_state -> (Ast.stacksymbols) -> 'ttv_return =
   fun _menhir_env _menhir_stack _menhir_s _v ->
     match _menhir_s with
@@ -76,12 +74,13 @@ let rec _menhir_goto_nonemptystack : _menhir_env -> 'ttv_tail -> _menhir_state -
         let (_menhir_stack, _menhir_s, (x : (
 # 8 "parser.mly"
       (char)
-# 80 "parser.ml"
+# 78 "parser.ml"
         ))) = _menhir_stack in
+        let _2 = () in
         let _v : (Ast.stacksymbols) = 
 # 67 "parser.mly"
                                             (x::y)
-# 85 "parser.ml"
+# 84 "parser.ml"
          in
         _menhir_goto_nonemptystack _menhir_env _menhir_stack _menhir_s _v
     | MenhirState42 ->
@@ -91,7 +90,7 @@ let rec _menhir_goto_nonemptystack : _menhir_env -> 'ttv_tail -> _menhir_state -
         let _v : (Ast.stacksymbols) = 
 # 63 "parser.mly"
                       (s)
-# 95 "parser.ml"
+# 94 "parser.ml"
          in
         _menhir_goto_stack _menhir_env _menhir_stack _menhir_s _v
     | _ ->
@@ -111,20 +110,26 @@ and _menhir_goto_stack : _menhir_env -> 'ttv_tail -> _menhir_state -> (Ast.stack
         let ((((((_menhir_stack, _menhir_s), (a : (
 # 7 "parser.mly"
       (int)
-# 115 "parser.ml"
+# 114 "parser.ml"
         ))), (b : (Ast.inputsymbol))), (c : (
 # 8 "parser.mly"
       (char)
-# 119 "parser.ml"
+# 118 "parser.ml"
         ))), (d : (
 # 7 "parser.mly"
       (int)
-# 123 "parser.ml"
+# 122 "parser.ml"
         ))), _, (e : (Ast.stacksymbols))) = _menhir_stack in
+        let _11 = () in
+        let _9 = () in
+        let _7 = () in
+        let _5 = () in
+        let _3 = () in
+        let _1 = () in
         let _v : (Ast.transition) = 
 # 55 "parser.mly"
                                                                                                 ((a, b, c, d, e))
-# 128 "parser.ml"
+# 133 "parser.ml"
          in
         let _menhir_stack = (_menhir_stack, _menhir_s, _v) in
         let _menhir_stack = Obj.magic _menhir_stack in
@@ -149,7 +154,7 @@ and _menhir_goto_stack : _menhir_env -> 'ttv_tail -> _menhir_state -> (Ast.stack
 and _menhir_run43 : _menhir_env -> 'ttv_tail -> _menhir_state -> (
 # 8 "parser.mly"
       (char)
-# 153 "parser.ml"
+# 158 "parser.ml"
 ) -> 'ttv_return =
   fun _menhir_env _menhir_stack _menhir_s _v ->
     let _menhir_stack = (_menhir_stack, _menhir_s, _v) in
@@ -172,12 +177,12 @@ and _menhir_run43 : _menhir_env -> 'ttv_tail -> _menhir_state -> (
         let (_menhir_stack, _menhir_s, (x : (
 # 8 "parser.mly"
       (char)
-# 176 "parser.ml"
+# 181 "parser.ml"
         ))) = _menhir_stack in
         let _v : (Ast.stacksymbols) = 
 # 66 "parser.mly"
                 ([x])
-# 181 "parser.ml"
+# 186 "parser.ml"
          in
         _menhir_goto_nonemptystack _menhir_env _menhir_stack _menhir_s _v
     | _ ->
@@ -194,10 +199,12 @@ and _menhir_goto_translist : _menhir_env -> 'ttv_tail -> _menhir_state -> (Ast.t
         let _menhir_stack = Obj.magic _menhir_stack in
         let _menhir_stack = Obj.magic _menhir_stack in
         let (t : (Ast.transitions)) = _v in
+        let _2 = () in
+        let _1 = () in
         let _v : (Ast.transitions) = 
 # 48 "parser.mly"
                                          (t)
-# 201 "parser.ml"
+# 208 "parser.ml"
          in
         let _menhir_stack = (_menhir_stack, _v) in
         let _menhir_stack = Obj.magic _menhir_stack in
@@ -208,14 +215,23 @@ and _menhir_goto_translist : _menhir_env -> 'ttv_tail -> _menhir_state -> (Ast.t
             let _menhir_stack = Obj.magic _menhir_stack in
             let _menhir_stack = Obj.magic _menhir_stack in
             let ((_menhir_stack, (decl : (Ast.declarations))), (tr_list : (Ast.transitions))) = _menhir_stack in
-            let _v : (Ast.automaton) = 
+            let _3 = () in
+            let _v : (
+# 10 "parser.mly"
+      (Ast.automaton)
+# 223 "parser.ml"
+            ) = 
 # 15 "parser.mly"
-                                              (build_automaton decl tr_list)
-# 215 "parser.ml"
+                                              (check_conflict tr_list; build_automaton decl tr_list)
+# 227 "parser.ml"
              in
             let _menhir_stack = Obj.magic _menhir_stack in
             let _menhir_stack = Obj.magic _menhir_stack in
-            let (_1 : (Ast.automaton)) = _v in
+            let (_1 : (
+# 10 "parser.mly"
+      (Ast.automaton)
+# 234 "parser.ml"
+            )) = _v in
             Obj.magic _1
         | _ ->
             assert (not _menhir_env._menhir_error);
@@ -230,7 +246,7 @@ and _menhir_goto_translist : _menhir_env -> 'ttv_tail -> _menhir_state -> (Ast.t
         let _v : (Ast.transitions) = 
 # 52 "parser.mly"
                                (t::q)
-# 234 "parser.ml"
+# 250 "parser.ml"
          in
         _menhir_goto_translist _menhir_env _menhir_stack _menhir_s _v
     | _ ->
@@ -278,7 +294,7 @@ and _menhir_goto_minuscule_ou_vide : _menhir_env -> 'ttv_tail -> (Ast.inputsymbo
                             let _v : (Ast.stacksymbols) = 
 # 62 "parser.mly"
       ([])
-# 282 "parser.ml"
+# 298 "parser.ml"
                              in
                             _menhir_goto_stack _menhir_env _menhir_stack _menhir_s _v
                         | _ ->
@@ -321,7 +337,7 @@ and _menhir_reduce22 : _menhir_env -> 'ttv_tail -> _menhir_state -> 'ttv_return 
     let _v : (Ast.transitions) = 
 # 51 "parser.mly"
      ([])
-# 325 "parser.ml"
+# 341 "parser.ml"
      in
     _menhir_goto_translist _menhir_env _menhir_stack _menhir_s _v
 
@@ -349,12 +365,12 @@ and _menhir_run33 : _menhir_env -> 'ttv_tail -> _menhir_state -> 'ttv_return =
                 let (x : (
 # 8 "parser.mly"
       (char)
-# 353 "parser.ml"
+# 369 "parser.ml"
                 )) = _v in
                 let _v : (Ast.inputsymbol) = 
 # 59 "parser.mly"
                   (x)
-# 358 "parser.ml"
+# 374 "parser.ml"
                  in
                 _menhir_goto_minuscule_ou_vide _menhir_env _menhir_stack _v
             | COMMA ->
@@ -362,7 +378,7 @@ and _menhir_run33 : _menhir_env -> 'ttv_tail -> _menhir_state -> 'ttv_return =
                 let _v : (Ast.inputsymbol) = 
 # 58 "parser.mly"
      ('&')
-# 366 "parser.ml"
+# 382 "parser.ml"
                  in
                 _menhir_goto_minuscule_ou_vide _menhir_env _menhir_stack _v
             | _ ->
@@ -394,22 +410,25 @@ and _menhir_goto_suite_chiffres_nonvide : _menhir_env -> 'ttv_tail -> _menhir_st
         let (_menhir_stack, _menhir_s, (x : (
 # 7 "parser.mly"
       (int)
-# 398 "parser.ml"
+# 414 "parser.ml"
         ))) = _menhir_stack in
+        let _2 = () in
         let _v : (Ast.states) = 
 # 45 "parser.mly"
                                              (x::y)
-# 403 "parser.ml"
+# 420 "parser.ml"
          in
         _menhir_goto_suite_chiffres_nonvide _menhir_env _menhir_stack _menhir_s _v
     | MenhirState16 ->
         let _menhir_stack = Obj.magic _menhir_stack in
         let _menhir_stack = Obj.magic _menhir_stack in
         let (state_symbs : (Ast.states)) = _v in
+        let _2 = () in
+        let _1 = () in
         let _v : (Ast.states) = 
 # 27 "parser.mly"
                                                            (state_symbs)
-# 413 "parser.ml"
+# 432 "parser.ml"
          in
         let _menhir_stack = (_menhir_stack, _v) in
         let _menhir_stack = Obj.magic _menhir_stack in
@@ -433,12 +452,14 @@ and _menhir_goto_suite_chiffres_nonvide : _menhir_env -> 'ttv_tail -> _menhir_st
                     let (x : (
 # 7 "parser.mly"
       (int)
-# 437 "parser.ml"
+# 456 "parser.ml"
                     )) = _v in
+                    let _2 = () in
+                    let _1 = () in
                     let _v : (Ast.initstate) = 
 # 30 "parser.mly"
                                     (x)
-# 442 "parser.ml"
+# 463 "parser.ml"
                      in
                     let _menhir_stack = (_menhir_stack, _v) in
                     let _menhir_stack = Obj.magic _menhir_stack in
@@ -462,12 +483,14 @@ and _menhir_goto_suite_chiffres_nonvide : _menhir_env -> 'ttv_tail -> _menhir_st
                                 let (x : (
 # 8 "parser.mly"
       (char)
-# 466 "parser.ml"
+# 487 "parser.ml"
                                 )) = _v in
+                                let _2 = () in
+                                let _1 = () in
                                 let _v : (Ast.initstack) = 
 # 33 "parser.mly"
                                         (x)
-# 471 "parser.ml"
+# 494 "parser.ml"
                                  in
                                 let _menhir_stack = Obj.magic _menhir_stack in
                                 let _menhir_stack = Obj.magic _menhir_stack in
@@ -476,7 +499,7 @@ and _menhir_goto_suite_chiffres_nonvide : _menhir_env -> 'ttv_tail -> _menhir_st
                                 let _v : (Ast.declarations) = 
 # 18 "parser.mly"
                                                                          ((a, b, c, d, e))
-# 480 "parser.ml"
+# 503 "parser.ml"
                                  in
                                 let _menhir_stack = (_menhir_stack, _v) in
                                 let _menhir_stack = Obj.magic _menhir_stack in
@@ -547,7 +570,7 @@ and _menhir_goto_suite_chiffres_nonvide : _menhir_env -> 'ttv_tail -> _menhir_st
 and _menhir_run17 : _menhir_env -> 'ttv_tail -> _menhir_state -> (
 # 7 "parser.mly"
       (int)
-# 551 "parser.ml"
+# 574 "parser.ml"
 ) -> 'ttv_return =
   fun _menhir_env _menhir_stack _menhir_s _v ->
     let _menhir_stack = (_menhir_stack, _menhir_s, _v) in
@@ -570,12 +593,12 @@ and _menhir_run17 : _menhir_env -> 'ttv_tail -> _menhir_state -> (
         let (_menhir_stack, _menhir_s, (x : (
 # 7 "parser.mly"
       (int)
-# 574 "parser.ml"
+# 597 "parser.ml"
         ))) = _menhir_stack in
         let _v : (Ast.states) = 
 # 44 "parser.mly"
             ([x])
-# 579 "parser.ml"
+# 602 "parser.ml"
          in
         _menhir_goto_suite_chiffres_nonvide _menhir_env _menhir_stack _menhir_s _v
     | _ ->
@@ -595,22 +618,25 @@ and _menhir_goto_suite_maj_nonvide : _menhir_env -> 'ttv_tail -> _menhir_state -
         let (_menhir_stack, _menhir_s, (x : (
 # 8 "parser.mly"
       (char)
-# 599 "parser.ml"
+# 622 "parser.ml"
         ))) = _menhir_stack in
+        let _2 = () in
         let _v : (Ast.stacksymbols) = 
 # 41 "parser.mly"
                                             (x::y)
-# 604 "parser.ml"
+# 628 "parser.ml"
          in
         _menhir_goto_suite_maj_nonvide _menhir_env _menhir_stack _menhir_s _v
     | MenhirState9 ->
         let _menhir_stack = Obj.magic _menhir_stack in
         let _menhir_stack = Obj.magic _menhir_stack in
         let (stack_symbs : (Ast.stacksymbols)) = _v in
+        let _2 = () in
+        let _1 = () in
         let _v : (Ast.stacksymbols) = 
 # 24 "parser.mly"
                                                              (stack_symbs)
-# 614 "parser.ml"
+# 640 "parser.ml"
          in
         let _menhir_stack = (_menhir_stack, _v) in
         let _menhir_stack = Obj.magic _menhir_stack in
@@ -648,13 +674,13 @@ and _menhir_goto_suite_maj_nonvide : _menhir_env -> 'ttv_tail -> _menhir_state -
 
 and _menhir_fail : unit -> 'a =
   fun () ->
-    Printf.eprintf "Internal failure -- please contact the parser generator's developers.\n%!";
+    Printf.fprintf stderr "Internal failure -- please contact the parser generator's developers.\n%!";
     assert false
 
 and _menhir_run10 : _menhir_env -> 'ttv_tail -> _menhir_state -> (
 # 8 "parser.mly"
       (char)
-# 658 "parser.ml"
+# 684 "parser.ml"
 ) -> 'ttv_return =
   fun _menhir_env _menhir_stack _menhir_s _v ->
     let _menhir_stack = (_menhir_stack, _menhir_s, _v) in
@@ -677,12 +703,12 @@ and _menhir_run10 : _menhir_env -> 'ttv_tail -> _menhir_state -> (
         let (_menhir_stack, _menhir_s, (x : (
 # 8 "parser.mly"
       (char)
-# 681 "parser.ml"
+# 707 "parser.ml"
         ))) = _menhir_stack in
         let _v : (Ast.stacksymbols) = 
 # 40 "parser.mly"
                 ([x])
-# 686 "parser.ml"
+# 712 "parser.ml"
          in
         _menhir_goto_suite_maj_nonvide _menhir_env _menhir_stack _menhir_s _v
     | _ ->
@@ -702,22 +728,25 @@ and _menhir_goto_suite_min_nonvide : _menhir_env -> 'ttv_tail -> _menhir_state -
         let (_menhir_stack, _menhir_s, (x : (
 # 8 "parser.mly"
       (char)
-# 706 "parser.ml"
+# 732 "parser.ml"
         ))) = _menhir_stack in
+        let _2 = () in
         let _v : (Ast.inputsymbols) = 
 # 37 "parser.mly"
                                             (x::y)
-# 711 "parser.ml"
+# 738 "parser.ml"
          in
         _menhir_goto_suite_min_nonvide _menhir_env _menhir_stack _menhir_s _v
     | MenhirState2 ->
         let _menhir_stack = Obj.magic _menhir_stack in
         let _menhir_stack = Obj.magic _menhir_stack in
         let (input_symbs : (Ast.inputsymbols)) = _v in
+        let _2 = () in
+        let _1 = () in
         let _v : (Ast.inputsymbols) = 
 # 21 "parser.mly"
                                                              (input_symbs)
-# 721 "parser.ml"
+# 750 "parser.ml"
          in
         let _menhir_stack = (_menhir_stack, _v) in
         let _menhir_stack = Obj.magic _menhir_stack in
@@ -796,7 +825,7 @@ and _menhir_errorcase : _menhir_env -> 'ttv_tail -> _menhir_state -> 'ttv_return
 and _menhir_run3 : _menhir_env -> 'ttv_tail -> _menhir_state -> (
 # 8 "parser.mly"
       (char)
-# 800 "parser.ml"
+# 829 "parser.ml"
 ) -> 'ttv_return =
   fun _menhir_env _menhir_stack _menhir_s _v ->
     let _menhir_stack = (_menhir_stack, _menhir_s, _v) in
@@ -819,12 +848,12 @@ and _menhir_run3 : _menhir_env -> 'ttv_tail -> _menhir_state -> (
         let (_menhir_stack, _menhir_s, (x : (
 # 8 "parser.mly"
       (char)
-# 823 "parser.ml"
+# 852 "parser.ml"
         ))) = _menhir_stack in
         let _v : (Ast.inputsymbols) = 
 # 36 "parser.mly"
                 ([x])
-# 828 "parser.ml"
+# 857 "parser.ml"
          in
         _menhir_goto_suite_min_nonvide _menhir_env _menhir_stack _menhir_s _v
     | _ ->
@@ -846,12 +875,17 @@ and _menhir_discard : _menhir_env -> _menhir_env =
       _menhir_error = false;
     }
 
-and automaton : (Lexing.lexbuf -> token) -> Lexing.lexbuf -> (Ast.automaton) =
+and automaton : (Lexing.lexbuf -> token) -> Lexing.lexbuf -> (
+# 10 "parser.mly"
+      (Ast.automaton)
+# 882 "parser.ml"
+) =
   fun lexer lexbuf ->
-    let _menhir_env = {
+    let _menhir_env = let _tok = Obj.magic () in
+    {
       _menhir_lexer = lexer;
       _menhir_lexbuf = lexbuf;
-      _menhir_token = Obj.magic ();
+      _menhir_token = _tok;
       _menhir_error = false;
     } in
     Obj.magic (let _menhir_stack = ((), _menhir_env._menhir_lexbuf.Lexing.lex_curr_p) in
@@ -884,3 +918,8 @@ and automaton : (Lexing.lexbuf -> token) -> Lexing.lexbuf -> (Ast.automaton) =
         _menhir_env._menhir_error <- true;
         let _menhir_stack = Obj.magic _menhir_stack in
         raise _eRR)
+
+# 269 "<standard.mly>"
+  
+
+# 926 "parser.ml"

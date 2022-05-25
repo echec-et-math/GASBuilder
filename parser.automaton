@@ -1,554 +1,255 @@
 State 0:
-## Known stack suffix:
-##
-## LR(1) items:
 automaton' -> . automaton [ # ]
-## Transitions:
 -- On INPUT_SYMBOLS_HEADER shift to state 1
 -- On inputsymbols shift to state 7
 -- On declarations shift to state 30
 -- On automaton shift to state 54
-## Reductions:
 
 State 1:
-## Known stack suffix:
-## INPUT_SYMBOLS_HEADER
-## LR(1) items:
 inputsymbols -> INPUT_SYMBOLS_HEADER . COLON suite_min_nonvide [ STACK_SYMBOLS_HEADER ]
-## Transitions:
 -- On COLON shift to state 2
-## Reductions:
 
 State 2:
-## Known stack suffix:
-## INPUT_SYMBOLS_HEADER COLON
-## LR(1) items:
 inputsymbols -> INPUT_SYMBOLS_HEADER COLON . suite_min_nonvide [ STACK_SYMBOLS_HEADER ]
-## Transitions:
 -- On LC_LETTER shift to state 3
 -- On suite_min_nonvide shift to state 6
-## Reductions:
 
 State 3:
-## Known stack suffix:
-## LC_LETTER
-## LR(1) items:
 suite_min_nonvide -> LC_LETTER . [ STACK_SYMBOLS_HEADER ]
 suite_min_nonvide -> LC_LETTER . COMMA suite_min_nonvide [ STACK_SYMBOLS_HEADER ]
-## Transitions:
 -- On COMMA shift to state 4
-## Reductions:
--- On STACK_SYMBOLS_HEADER
---   reduce production suite_min_nonvide -> LC_LETTER
+-- On STACK_SYMBOLS_HEADER reduce production suite_min_nonvide -> LC_LETTER 
 
 State 4:
-## Known stack suffix:
-## LC_LETTER COMMA
-## LR(1) items:
 suite_min_nonvide -> LC_LETTER COMMA . suite_min_nonvide [ STACK_SYMBOLS_HEADER ]
-## Transitions:
 -- On LC_LETTER shift to state 3
 -- On suite_min_nonvide shift to state 5
-## Reductions:
 
 State 5:
-## Known stack suffix:
-## LC_LETTER COMMA suite_min_nonvide
-## LR(1) items:
 suite_min_nonvide -> LC_LETTER COMMA suite_min_nonvide . [ STACK_SYMBOLS_HEADER ]
-## Transitions:
-## Reductions:
--- On STACK_SYMBOLS_HEADER
---   reduce production suite_min_nonvide -> LC_LETTER COMMA suite_min_nonvide
+-- On STACK_SYMBOLS_HEADER reduce production suite_min_nonvide -> LC_LETTER COMMA suite_min_nonvide 
 
 State 6:
-## Known stack suffix:
-## INPUT_SYMBOLS_HEADER COLON suite_min_nonvide
-## LR(1) items:
 inputsymbols -> INPUT_SYMBOLS_HEADER COLON suite_min_nonvide . [ STACK_SYMBOLS_HEADER ]
-## Transitions:
-## Reductions:
--- On STACK_SYMBOLS_HEADER
---   reduce production inputsymbols -> INPUT_SYMBOLS_HEADER COLON suite_min_nonvide
+-- On STACK_SYMBOLS_HEADER reduce production inputsymbols -> INPUT_SYMBOLS_HEADER COLON suite_min_nonvide 
 
 State 7:
-## Known stack suffix:
-## inputsymbols
-## LR(1) items:
 declarations -> inputsymbols . stacksymbols states initialstate initialstack [ TRANSITIONS_HEADER ]
-## Transitions:
 -- On STACK_SYMBOLS_HEADER shift to state 8
 -- On stacksymbols shift to state 14
-## Reductions:
 
 State 8:
-## Known stack suffix:
-## STACK_SYMBOLS_HEADER
-## LR(1) items:
 stacksymbols -> STACK_SYMBOLS_HEADER . COLON suite_maj_nonvide [ STATES_HEADER ]
-## Transitions:
 -- On COLON shift to state 9
-## Reductions:
 
 State 9:
-## Known stack suffix:
-## STACK_SYMBOLS_HEADER COLON
-## LR(1) items:
 stacksymbols -> STACK_SYMBOLS_HEADER COLON . suite_maj_nonvide [ STATES_HEADER ]
-## Transitions:
 -- On UC_LETTER shift to state 10
 -- On suite_maj_nonvide shift to state 13
-## Reductions:
 
 State 10:
-## Known stack suffix:
-## UC_LETTER
-## LR(1) items:
 suite_maj_nonvide -> UC_LETTER . [ STATES_HEADER ]
 suite_maj_nonvide -> UC_LETTER . COMMA suite_maj_nonvide [ STATES_HEADER ]
-## Transitions:
 -- On COMMA shift to state 11
-## Reductions:
--- On STATES_HEADER
---   reduce production suite_maj_nonvide -> UC_LETTER
+-- On STATES_HEADER reduce production suite_maj_nonvide -> UC_LETTER 
 
 State 11:
-## Known stack suffix:
-## UC_LETTER COMMA
-## LR(1) items:
 suite_maj_nonvide -> UC_LETTER COMMA . suite_maj_nonvide [ STATES_HEADER ]
-## Transitions:
 -- On UC_LETTER shift to state 10
 -- On suite_maj_nonvide shift to state 12
-## Reductions:
 
 State 12:
-## Known stack suffix:
-## UC_LETTER COMMA suite_maj_nonvide
-## LR(1) items:
 suite_maj_nonvide -> UC_LETTER COMMA suite_maj_nonvide . [ STATES_HEADER ]
-## Transitions:
-## Reductions:
--- On STATES_HEADER
---   reduce production suite_maj_nonvide -> UC_LETTER COMMA suite_maj_nonvide
+-- On STATES_HEADER reduce production suite_maj_nonvide -> UC_LETTER COMMA suite_maj_nonvide 
 
 State 13:
-## Known stack suffix:
-## STACK_SYMBOLS_HEADER COLON suite_maj_nonvide
-## LR(1) items:
 stacksymbols -> STACK_SYMBOLS_HEADER COLON suite_maj_nonvide . [ STATES_HEADER ]
-## Transitions:
-## Reductions:
--- On STATES_HEADER
---   reduce production stacksymbols -> STACK_SYMBOLS_HEADER COLON suite_maj_nonvide
+-- On STATES_HEADER reduce production stacksymbols -> STACK_SYMBOLS_HEADER COLON suite_maj_nonvide 
 
 State 14:
-## Known stack suffix:
-## inputsymbols stacksymbols
-## LR(1) items:
 declarations -> inputsymbols stacksymbols . states initialstate initialstack [ TRANSITIONS_HEADER ]
-## Transitions:
 -- On STATES_HEADER shift to state 15
 -- On states shift to state 21
-## Reductions:
 
 State 15:
-## Known stack suffix:
-## STATES_HEADER
-## LR(1) items:
 states -> STATES_HEADER . COLON suite_chiffres_nonvide [ INIT_STATE_HEADER ]
-## Transitions:
 -- On COLON shift to state 16
-## Reductions:
 
 State 16:
-## Known stack suffix:
-## STATES_HEADER COLON
-## LR(1) items:
 states -> STATES_HEADER COLON . suite_chiffres_nonvide [ INIT_STATE_HEADER ]
-## Transitions:
 -- On DIGIT shift to state 17
 -- On suite_chiffres_nonvide shift to state 20
-## Reductions:
 
 State 17:
-## Known stack suffix:
-## DIGIT
-## LR(1) items:
 suite_chiffres_nonvide -> DIGIT . [ INIT_STATE_HEADER ]
 suite_chiffres_nonvide -> DIGIT . COMMA suite_chiffres_nonvide [ INIT_STATE_HEADER ]
-## Transitions:
 -- On COMMA shift to state 18
-## Reductions:
--- On INIT_STATE_HEADER
---   reduce production suite_chiffres_nonvide -> DIGIT
+-- On INIT_STATE_HEADER reduce production suite_chiffres_nonvide -> DIGIT 
 
 State 18:
-## Known stack suffix:
-## DIGIT COMMA
-## LR(1) items:
 suite_chiffres_nonvide -> DIGIT COMMA . suite_chiffres_nonvide [ INIT_STATE_HEADER ]
-## Transitions:
 -- On DIGIT shift to state 17
 -- On suite_chiffres_nonvide shift to state 19
-## Reductions:
 
 State 19:
-## Known stack suffix:
-## DIGIT COMMA suite_chiffres_nonvide
-## LR(1) items:
 suite_chiffres_nonvide -> DIGIT COMMA suite_chiffres_nonvide . [ INIT_STATE_HEADER ]
-## Transitions:
-## Reductions:
--- On INIT_STATE_HEADER
---   reduce production suite_chiffres_nonvide -> DIGIT COMMA suite_chiffres_nonvide
+-- On INIT_STATE_HEADER reduce production suite_chiffres_nonvide -> DIGIT COMMA suite_chiffres_nonvide 
 
 State 20:
-## Known stack suffix:
-## STATES_HEADER COLON suite_chiffres_nonvide
-## LR(1) items:
 states -> STATES_HEADER COLON suite_chiffres_nonvide . [ INIT_STATE_HEADER ]
-## Transitions:
-## Reductions:
--- On INIT_STATE_HEADER
---   reduce production states -> STATES_HEADER COLON suite_chiffres_nonvide
+-- On INIT_STATE_HEADER reduce production states -> STATES_HEADER COLON suite_chiffres_nonvide 
 
 State 21:
-## Known stack suffix:
-## inputsymbols stacksymbols states
-## LR(1) items:
 declarations -> inputsymbols stacksymbols states . initialstate initialstack [ TRANSITIONS_HEADER ]
-## Transitions:
 -- On INIT_STATE_HEADER shift to state 22
 -- On initialstate shift to state 25
-## Reductions:
 
 State 22:
-## Known stack suffix:
-## INIT_STATE_HEADER
-## LR(1) items:
 initialstate -> INIT_STATE_HEADER . COLON DIGIT [ INIT_STACK_HEADER ]
-## Transitions:
 -- On COLON shift to state 23
-## Reductions:
 
 State 23:
-## Known stack suffix:
-## INIT_STATE_HEADER COLON
-## LR(1) items:
 initialstate -> INIT_STATE_HEADER COLON . DIGIT [ INIT_STACK_HEADER ]
-## Transitions:
 -- On DIGIT shift to state 24
-## Reductions:
 
 State 24:
-## Known stack suffix:
-## INIT_STATE_HEADER COLON DIGIT
-## LR(1) items:
 initialstate -> INIT_STATE_HEADER COLON DIGIT . [ INIT_STACK_HEADER ]
-## Transitions:
-## Reductions:
--- On INIT_STACK_HEADER
---   reduce production initialstate -> INIT_STATE_HEADER COLON DIGIT
+-- On INIT_STACK_HEADER reduce production initialstate -> INIT_STATE_HEADER COLON DIGIT 
 
 State 25:
-## Known stack suffix:
-## inputsymbols stacksymbols states initialstate
-## LR(1) items:
 declarations -> inputsymbols stacksymbols states initialstate . initialstack [ TRANSITIONS_HEADER ]
-## Transitions:
 -- On INIT_STACK_HEADER shift to state 26
 -- On initialstack shift to state 29
-## Reductions:
 
 State 26:
-## Known stack suffix:
-## INIT_STACK_HEADER
-## LR(1) items:
 initialstack -> INIT_STACK_HEADER . COLON UC_LETTER [ TRANSITIONS_HEADER ]
-## Transitions:
 -- On COLON shift to state 27
-## Reductions:
 
 State 27:
-## Known stack suffix:
-## INIT_STACK_HEADER COLON
-## LR(1) items:
 initialstack -> INIT_STACK_HEADER COLON . UC_LETTER [ TRANSITIONS_HEADER ]
-## Transitions:
 -- On UC_LETTER shift to state 28
-## Reductions:
 
 State 28:
-## Known stack suffix:
-## INIT_STACK_HEADER COLON UC_LETTER
-## LR(1) items:
 initialstack -> INIT_STACK_HEADER COLON UC_LETTER . [ TRANSITIONS_HEADER ]
-## Transitions:
-## Reductions:
--- On TRANSITIONS_HEADER
---   reduce production initialstack -> INIT_STACK_HEADER COLON UC_LETTER
+-- On TRANSITIONS_HEADER reduce production initialstack -> INIT_STACK_HEADER COLON UC_LETTER 
 
 State 29:
-## Known stack suffix:
-## inputsymbols stacksymbols states initialstate initialstack
-## LR(1) items:
 declarations -> inputsymbols stacksymbols states initialstate initialstack . [ TRANSITIONS_HEADER ]
-## Transitions:
-## Reductions:
--- On TRANSITIONS_HEADER
---   reduce production declarations -> inputsymbols stacksymbols states initialstate initialstack
+-- On TRANSITIONS_HEADER reduce production declarations -> inputsymbols stacksymbols states initialstate initialstack 
 
 State 30:
-## Known stack suffix:
-## declarations
-## LR(1) items:
 automaton -> declarations . transitions EOF [ # ]
-## Transitions:
 -- On TRANSITIONS_HEADER shift to state 31
 -- On transitions shift to state 52
-## Reductions:
 
 State 31:
-## Known stack suffix:
-## TRANSITIONS_HEADER
-## LR(1) items:
 transitions -> TRANSITIONS_HEADER . COLON translist [ EOF ]
-## Transitions:
 -- On COLON shift to state 32
-## Reductions:
 
 State 32:
-## Known stack suffix:
-## TRANSITIONS_HEADER COLON
-## LR(1) items:
 transitions -> TRANSITIONS_HEADER COLON . translist [ EOF ]
-## Transitions:
 -- On LPARA shift to state 33
 -- On translist shift to state 49
 -- On transition shift to state 50
-## Reductions:
--- On EOF
---   reduce production translist ->
+-- On EOF reduce production translist -> 
 
 State 33:
-## Known stack suffix:
-## LPARA
-## LR(1) items:
 transition -> LPARA . DIGIT COMMA minuscule_ou_vide COMMA UC_LETTER COMMA DIGIT COMMA stack RPARA [ LPARA EOF ]
-## Transitions:
 -- On DIGIT shift to state 34
-## Reductions:
 
 State 34:
-## Known stack suffix:
-## LPARA DIGIT
-## LR(1) items:
 transition -> LPARA DIGIT . COMMA minuscule_ou_vide COMMA UC_LETTER COMMA DIGIT COMMA stack RPARA [ LPARA EOF ]
-## Transitions:
 -- On COMMA shift to state 35
-## Reductions:
 
 State 35:
-## Known stack suffix:
-## LPARA DIGIT COMMA
-## LR(1) items:
 transition -> LPARA DIGIT COMMA . minuscule_ou_vide COMMA UC_LETTER COMMA DIGIT COMMA stack RPARA [ LPARA EOF ]
-## Transitions:
 -- On LC_LETTER shift to state 36
 -- On minuscule_ou_vide shift to state 37
-## Reductions:
--- On COMMA
---   reduce production minuscule_ou_vide ->
+-- On COMMA reduce production minuscule_ou_vide -> 
 
 State 36:
-## Known stack suffix:
-## LC_LETTER
-## LR(1) items:
 minuscule_ou_vide -> LC_LETTER . [ COMMA ]
-## Transitions:
-## Reductions:
--- On COMMA
---   reduce production minuscule_ou_vide -> LC_LETTER
+-- On COMMA reduce production minuscule_ou_vide -> LC_LETTER 
 
 State 37:
-## Known stack suffix:
-## LPARA DIGIT COMMA minuscule_ou_vide
-## LR(1) items:
 transition -> LPARA DIGIT COMMA minuscule_ou_vide . COMMA UC_LETTER COMMA DIGIT COMMA stack RPARA [ LPARA EOF ]
-## Transitions:
 -- On COMMA shift to state 38
-## Reductions:
 
 State 38:
-## Known stack suffix:
-## LPARA DIGIT COMMA minuscule_ou_vide COMMA
-## LR(1) items:
 transition -> LPARA DIGIT COMMA minuscule_ou_vide COMMA . UC_LETTER COMMA DIGIT COMMA stack RPARA [ LPARA EOF ]
-## Transitions:
 -- On UC_LETTER shift to state 39
-## Reductions:
 
 State 39:
-## Known stack suffix:
-## LPARA DIGIT COMMA minuscule_ou_vide COMMA UC_LETTER
-## LR(1) items:
 transition -> LPARA DIGIT COMMA minuscule_ou_vide COMMA UC_LETTER . COMMA DIGIT COMMA stack RPARA [ LPARA EOF ]
-## Transitions:
 -- On COMMA shift to state 40
-## Reductions:
 
 State 40:
-## Known stack suffix:
-## LPARA DIGIT COMMA minuscule_ou_vide COMMA UC_LETTER COMMA
-## LR(1) items:
 transition -> LPARA DIGIT COMMA minuscule_ou_vide COMMA UC_LETTER COMMA . DIGIT COMMA stack RPARA [ LPARA EOF ]
-## Transitions:
 -- On DIGIT shift to state 41
-## Reductions:
 
 State 41:
-## Known stack suffix:
-## LPARA DIGIT COMMA minuscule_ou_vide COMMA UC_LETTER COMMA DIGIT
-## LR(1) items:
 transition -> LPARA DIGIT COMMA minuscule_ou_vide COMMA UC_LETTER COMMA DIGIT . COMMA stack RPARA [ LPARA EOF ]
-## Transitions:
 -- On COMMA shift to state 42
-## Reductions:
 
 State 42:
-## Known stack suffix:
-## LPARA DIGIT COMMA minuscule_ou_vide COMMA UC_LETTER COMMA DIGIT COMMA
-## LR(1) items:
 transition -> LPARA DIGIT COMMA minuscule_ou_vide COMMA UC_LETTER COMMA DIGIT COMMA . stack RPARA [ LPARA EOF ]
-## Transitions:
 -- On UC_LETTER shift to state 43
 -- On stack shift to state 46
 -- On nonemptystack shift to state 48
-## Reductions:
--- On RPARA
---   reduce production stack ->
+-- On RPARA reduce production stack -> 
 
 State 43:
-## Known stack suffix:
-## UC_LETTER
-## LR(1) items:
 nonemptystack -> UC_LETTER . [ RPARA ]
 nonemptystack -> UC_LETTER . SEMICOLON nonemptystack [ RPARA ]
-## Transitions:
 -- On SEMICOLON shift to state 44
-## Reductions:
--- On RPARA
---   reduce production nonemptystack -> UC_LETTER
+-- On RPARA reduce production nonemptystack -> UC_LETTER 
 
 State 44:
-## Known stack suffix:
-## UC_LETTER SEMICOLON
-## LR(1) items:
 nonemptystack -> UC_LETTER SEMICOLON . nonemptystack [ RPARA ]
-## Transitions:
 -- On UC_LETTER shift to state 43
 -- On nonemptystack shift to state 45
-## Reductions:
 
 State 45:
-## Known stack suffix:
-## UC_LETTER SEMICOLON nonemptystack
-## LR(1) items:
 nonemptystack -> UC_LETTER SEMICOLON nonemptystack . [ RPARA ]
-## Transitions:
-## Reductions:
--- On RPARA
---   reduce production nonemptystack -> UC_LETTER SEMICOLON nonemptystack
+-- On RPARA reduce production nonemptystack -> UC_LETTER SEMICOLON nonemptystack 
 
 State 46:
-## Known stack suffix:
-## LPARA DIGIT COMMA minuscule_ou_vide COMMA UC_LETTER COMMA DIGIT COMMA stack
-## LR(1) items:
 transition -> LPARA DIGIT COMMA minuscule_ou_vide COMMA UC_LETTER COMMA DIGIT COMMA stack . RPARA [ LPARA EOF ]
-## Transitions:
 -- On RPARA shift to state 47
-## Reductions:
 
 State 47:
-## Known stack suffix:
-## LPARA DIGIT COMMA minuscule_ou_vide COMMA UC_LETTER COMMA DIGIT COMMA stack RPARA
-## LR(1) items:
 transition -> LPARA DIGIT COMMA minuscule_ou_vide COMMA UC_LETTER COMMA DIGIT COMMA stack RPARA . [ LPARA EOF ]
-## Transitions:
-## Reductions:
--- On LPARA EOF
---   reduce production transition -> LPARA DIGIT COMMA minuscule_ou_vide COMMA UC_LETTER COMMA DIGIT COMMA stack RPARA
+-- On LPARA reduce production transition -> LPARA DIGIT COMMA minuscule_ou_vide COMMA UC_LETTER COMMA DIGIT COMMA stack RPARA 
+-- On EOF reduce production transition -> LPARA DIGIT COMMA minuscule_ou_vide COMMA UC_LETTER COMMA DIGIT COMMA stack RPARA 
 
 State 48:
-## Known stack suffix:
-## nonemptystack
-## LR(1) items:
 stack -> nonemptystack . [ RPARA ]
-## Transitions:
-## Reductions:
--- On RPARA
---   reduce production stack -> nonemptystack
+-- On RPARA reduce production stack -> nonemptystack 
 
 State 49:
-## Known stack suffix:
-## TRANSITIONS_HEADER COLON translist
-## LR(1) items:
 transitions -> TRANSITIONS_HEADER COLON translist . [ EOF ]
-## Transitions:
-## Reductions:
--- On EOF
---   reduce production transitions -> TRANSITIONS_HEADER COLON translist
+-- On EOF reduce production transitions -> TRANSITIONS_HEADER COLON translist 
 
 State 50:
-## Known stack suffix:
-## transition
-## LR(1) items:
 translist -> transition . translist [ EOF ]
-## Transitions:
 -- On LPARA shift to state 33
 -- On translist shift to state 51
 -- On transition shift to state 50
-## Reductions:
--- On EOF
---   reduce production translist ->
+-- On EOF reduce production translist -> 
 
 State 51:
-## Known stack suffix:
-## transition translist
-## LR(1) items:
 translist -> transition translist . [ EOF ]
-## Transitions:
-## Reductions:
--- On EOF
---   reduce production translist -> transition translist
+-- On EOF reduce production translist -> transition translist 
 
 State 52:
-## Known stack suffix:
-## declarations transitions
-## LR(1) items:
 automaton -> declarations transitions . EOF [ # ]
-## Transitions:
 -- On EOF shift to state 53
-## Reductions:
 
 State 53:
-## Known stack suffix:
-## declarations transitions EOF
-## LR(1) items:
 automaton -> declarations transitions EOF . [ # ]
-## Transitions:
-## Reductions:
--- On #
---   reduce production automaton -> declarations transitions EOF
+-- On # reduce production automaton -> declarations transitions EOF 
 
 State 54:
-## Known stack suffix:
-## automaton
-## LR(1) items:
 automaton' -> automaton . [ # ]
-## Transitions:
-## Reductions:
--- On #
---   accept automaton
+-- On # accept automaton
 

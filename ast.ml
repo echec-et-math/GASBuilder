@@ -36,7 +36,19 @@ exception NoSuchTransition of (state * inputsymbol * stacksymbol)
 
 exception UndeterministicConflict of transition * transition
 
-let check_conflict declarations transitions = ();; (* TODO *)
+(*let rec validite declarations transitions = match transitions with
+  | [] -> ()
+  | t::q -> match t with
+    |(a,b,c,d,e) -> match declarations with *)
+
+let rec check_conflict transitions = match transitions with
+  | [] -> ()
+  | t::q -> (match q with 
+      |[] -> ()
+      |r::s -> (match t with 
+        |(a,b,c,d,e) -> (match r with
+          |(f,g,h,i,j) -> if a==f && c==h && (b==g || b=='&' || g=='&') then raise (UndeterministicConflict(t,r)) else check_conflict (t::s) ; check_conflict q)))
+;;
 
 let rec stack_to_string stack = match stack with
   | [] -> ""
