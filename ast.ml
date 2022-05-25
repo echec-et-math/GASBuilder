@@ -36,10 +36,12 @@ exception NoSuchTransition of (state * inputsymbol * stacksymbol)
 
 exception UndeterministicConflict of transition * transition
 
-(*let rec validite declarations transitions = match transitions with
-  | [] -> ()
-  | t::q -> match t with
-    |(a,b,c,d,e) -> match declarations with *)
+exception WrongInitialState of initstate
+
+exception WrongInitialStack of initstack
+
+let validite declarations = match declarations with
+  |(a,b,c,d,e) -> if (List.mem d c) then (if (List.mem e b) then () else raise (WrongInitialStack(e))) else raise (WrongInitialState(d));; 
 
 let rec check_conflict transitions = match transitions with
   | [] -> ()

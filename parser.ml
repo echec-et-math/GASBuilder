@@ -222,7 +222,7 @@ and _menhir_goto_translist : _menhir_env -> 'ttv_tail -> _menhir_state -> (Ast.t
 # 223 "parser.ml"
             ) = 
 # 15 "parser.mly"
-                                              (check_conflict tr_list; build_automaton decl tr_list)
+                                              (validite decl; check_conflict tr_list; build_automaton decl tr_list)
 # 227 "parser.ml"
              in
             let _menhir_stack = Obj.magic _menhir_stack in

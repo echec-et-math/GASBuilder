@@ -12,7 +12,7 @@ open Ast
 %%
 
 automaton:
-    decl=declarations tr_list=transitions EOF {check_conflict tr_list; build_automaton decl tr_list} (* We need to run it now *)
+    decl=declarations tr_list=transitions EOF {validite decl; check_conflict tr_list; build_automaton decl tr_list} (* We need to run it now *)
 
 declarations:
     a=inputsymbols b=stacksymbols c=states d=initialstate e=initialstack {(a, b, c, d, e)}
