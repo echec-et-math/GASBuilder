@@ -9,6 +9,7 @@ OBJECTS = $(SOURCES:.ml=.cmo)
 .PHONY: clean all 
 
 all: parser
+	test -p word_pipe || mkfifo word_pipe
 
 parser: ast.cmo parser.cmi parser.cmo lexer.cmo main.cmo 
 	$(OCAMLC) -o $@ $(OBJECTS)
@@ -31,7 +32,7 @@ parser.mly: ast.ml
 lexer.mll: parser.ml
 
 clean:
-	rm -fr parser.mli parser.ml lexer.ml *.cmo parser *.cmi *~ *.automaton *.conflicts
+	rm -fr parser.mli parser.ml lexer.ml *.cmo parser *.cmi *~ *.automaton *.conflicts word_pipe
 
 parser.cmo: ast.cmo parser.cmi
 lexer.cmo: parser.cmo

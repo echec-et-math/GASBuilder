@@ -4,6 +4,6 @@ if [ "$#" -ne 1 ]; then
     echo "Exemple MUST be located in the exemples/ folder and have a .exp extension"
     exit 2
 else
-    make
-    ./parser < exemples/${1}.exp
+    printf "Enter a word (& for epsilon) : " && read var1
+    printf "$var1" > word_pipe & ./parser < exemples/${1}.exp
 fi
