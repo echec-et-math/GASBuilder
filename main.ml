@@ -14,7 +14,7 @@ let run_automaton automaton =
     | NonEmptyStream -> print_endline "Word non accepted : Stack emptied before full consumation of input stream."
     | NonEmptyStack -> print_endline "Word non accepted : Stack non empty upon full consumation of input stream and no epsilon-transition available."
     | NoSuchTransition(cur_state, read_symbol, cur_stack_top) ->
-        print_endline ("Word non accepted : could not find a transition from state " ^ (string_of_int cur_state) ^ "reading character " ^ (Char.escaped read_symbol) ^ " with stack symbol " ^ (Char.escaped cur_stack_top) ^ " on top of the stack.")
+        print_endline ("Word non accepted : could not find a transition from state " ^ (string_of_int cur_state) ^ " reading character " ^ (Char.escaped read_symbol) ^ " with stack symbol " ^ (Char.escaped cur_stack_top) ^ " on top of the stack.")
     | NoSuchStateTransition(n) -> print_endline "Word non accepted : couldn't find a case for the current state."
     | NoSuchStreamTransition(ch) -> print_endline "Word non accepted : couldn't find a case for the character read."
     | NoSuchStackTransition(symb) -> print_endline "Word non accepted : couldn't find a case for the current stack top."
