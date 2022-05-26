@@ -21,6 +21,18 @@ rule main = parse
   | "initial state" {INIT_STATE_HEADER}
   | "initial stack" {INIT_STACK_HEADER}
   | "transitions" {TRANSITIONS_HEADER}
+  | "program" {PROGRAM_HEADER}
+  | "case" {CASE}
+  | "state" {STATE}
+  | "next" {NEXT}
+  | "top" {TOP}
+  | "begin" {BEGIN}
+  | "end" {END}
+  | "of" {OF}
+  | "pop" {POP}
+  | "push" {PUSH}
+  | "reject" {REJECT}
+  | "change" {CHANGE}
   | ':' {COLON}
   | ',' {COMMA}
   | ';' {SEMICOLON}
