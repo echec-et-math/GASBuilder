@@ -117,9 +117,9 @@ let rec check_program p =
       | StreamSwitch(l) -> stream_check l ; block_list_check l
       | StackSwitch(l) -> stack_check l ; block_list_check l
   with e -> match e with
-    | StateCaseRedundancy n -> print_endline ("Error : found multiple cases under same switch statement for the state number " ^ (string_of_int n))
-    | StreamCaseRedundancy ch -> print_endline ("Error : found multiple cases under same switch statement for the input symbol " ^ (Char.escaped ch))
-    | StackCaseRedundancy symb -> print_endline ("Error : found multiple cases under same switch statement for the stack symbol " ^ (Char.escaped symb))
+    | StateCaseRedundancy n -> print_endline ("Error : found multiple cases under same switch statement for the state number " ^ (string_of_int n)); exit 0
+    | StreamCaseRedundancy ch -> print_endline ("Error : found multiple cases under same switch statement for the input symbol " ^ (Char.escaped ch)); exit 0
+    | StackCaseRedundancy symb -> print_endline ("Error : found multiple cases under same switch statement for the stack symbol " ^ (Char.escaped symb)); exit 0
     | _ -> raise e;;
 
 let rec stack_to_string stack = match stack with
