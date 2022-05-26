@@ -1,9 +1,8 @@
 #!/bin/sh
 if [ "$#" -ne 1 ]; then
-    echo "Usage : ./run <file_name without extension nor path>"
-    echo "Exemple MUST be located in the exemples/ folder and have a .exp extension"
+    echo "Usage : ./run <file with extension and path>"
     exit 2
 else
     printf "Enter a word (& for epsilon) : " && read var1
-    printf "$var1" > word_pipe & ./parser < exemples/${1}.exp
+    printf "$var1" > word_pipe & ./parser < ${1}
 fi
