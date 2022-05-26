@@ -22,7 +22,7 @@ parser: ast.cmo parser.cmi parser.cmo lexer.cmo main.cmo
 
 %.ml %.mli: %.mly
 	rm -f $(<:.mly=.conflicts)
-	$(MENHIR) -v --infer $<
+	$(MENHIR) -v --infer --canonical $<
 
 %.ml: %.mll
 	$(OCAMLLEX) $<
@@ -32,6 +32,7 @@ parser.mly: ast.ml
 lexer.mll: parser.ml
 
 clean:
+	./pipe_fix
 	rm -fr parser.mli parser.ml lexer.ml *.cmo parser *.cmi *~ *.automaton *.conflicts word_pipe
 
 parser.cmo: ast.cmo parser.cmi
