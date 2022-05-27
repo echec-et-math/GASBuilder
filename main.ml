@@ -26,8 +26,5 @@ let notify_user =
     let automaton = Parser.automaton Lexer.main lexbuf in
     run_automaton automaton
   with e ->
-    let msg = Printexc.to_string e
-    and stack = Printexc.get_backtrace () in
-      Printf.eprintf "there was an error: %s%s\\n" msg stack;
-      raise e
+      print_endline "Unable to correctly parse your file. Please check the syntax."; exit 0
 ;;
