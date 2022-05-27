@@ -41,3 +41,9 @@ However, `pipe_fix` being manually called my our `./run` fix, you should not hav
 # Scrapped additional content
 
 We would have liked to allow a list of commands for a same case instead of a unique one for the program mode, but by following the given exemple we sticked to one only and it was then too late to fix. What we would have done to complete it would be to consider a sequence (list) of operations instead of a single one, separated by a dedicated token (it beaing an unused punctuation sign like `#`, `~`, `^` or `@`), and process the list sequentially within the program builder. This is not that hard or long to do, but as I'm writing this, it's too late to even consider fixing it reliably.
+
+We could also have implemented a check asserting the automaton is complete (there is always an available transition as long as there is something to read on both the input and the stack).
+
+We could have checked whether every declared symbol is, indeed, used at least once by the automaton : otherwise it could be simplified.
+
+We could also have implemented a check to assert every character of the entered word falls within our declared alphabet : the issue is that building the automaton (`build_automaton` or `build_program`) with our implementation doesn't directly save the character table, making the check a bit tedious at runtime (`run_automaton`). This could have been solved by dynamically storing the character list within the function, but again, it was scrapped due to a lack of time and a high threat of late-deadline dysfunctionment.
