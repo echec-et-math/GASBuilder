@@ -37,3 +37,7 @@ The program separates the word input to a pipe (`word_pipe`) to not mess with th
 - The program blocking for someone to read the word into the pipe, when there is no one to read (the exact same solution applies)
 
 However, `pipe_fix` being manually called my our `./run` fix, you should not have to ever use it.
+
+# Scrapped additional content
+
+We would have liked to allow a list of commands for a same case instead of a unique one for the program mode, but by following the given exemple we sticked to one only and it was then too late to fix. What we would have done to complete it would be to consider a sequence (list) of operations instead of a single one, separated by a dedicated token (it beaing an unused punctuation sign like `#`, `~`, `^` or `@`), and process the list sequentially within the program builder. This is not that hard or long to do, but as I'm writing this, it's too late to even consider fixing it reliably.
