@@ -63,8 +63,8 @@ let validite declarations =
     match declarations with
       (a,b,c,d,e) -> if (List.mem d c) then (if (List.mem e b) then () else raise (WrongInitialStack(e))) else raise (WrongInitialState(d))
   with e -> match e with
-    | WrongInitialState(s) -> print_endline ("Error : initial state " ^ (string_of_int s)^" is not part of the state list.")
-    | WrongInitialStack(s) -> print_endline ("Error : initial stack symbol " ^ (String.make 1 s)^" is not part of the stack symbols list.")
+    | WrongInitialState(s) -> print_endline ("Error : initial state " ^ (string_of_int s)^" is not part of the state list."); exit 0
+    | WrongInitialStack(s) -> print_endline ("Error : initial stack symbol " ^ (String.make 1 s)^" is not part of the stack symbols list.");exit 0
     | _ -> raise e;;
 
 let rec check_conflict transitions =
@@ -80,7 +80,7 @@ let rec check_conflict transitions =
     | UndeterministicConflict(trans1,trans2) -> let s1 = (match trans1 with
       |(a,b,c,d,e) -> "Automaton is not deterministic : on state "^(string_of_int a)^" with stacksymbol "^(String.make 1 c)^" both switches to state "^(string_of_int d)^" reading "^(String.make 1 b)) in
       let s2 = match trans2 with
-        |(f,g,h,i,j) -> " and state "^(string_of_int i)^" reading "^(String.make 1 g)^" are allowed." in print_endline (s1^s2)
+        |(f,g,h,i,j) -> " and state "^(string_of_int i)^" reading "^(String.make 1 g)^" are allowed." in print_endline (s1^s2); exit 0
     | _ -> raise e;;
 
 exception StateCaseRedundancy of state
@@ -117,9 +117,9 @@ let rec check_program p =
       | StreamSwitch(l) -> stream_check l ; block_list_check l
       | StackSwitch(l) -> stack_check l ; block_list_check l
   with e -> match e with
-    | StateCaseRedundancy n -> print_endline ("Error : found multiple cases under same switch statement for the state number " ^ (string_of_int n))
-    | StreamCaseRedundancy ch -> print_endline ("Error : found multiple cases under same switch statement for the input symbol " ^ (Char.escaped ch))
-    | StackCaseRedundancy symb -> print_endline ("Error : found multiple cases under same switch statement for the stack symbol " ^ (Char.escaped symb))
+    | StateCaseRedundancy n -> print_endline ("Error : found multiple cases under same switch statement for the state number " ^ (string_of_int n)); exit 0
+    | StreamCaseRedundancy ch -> print_endline ("Error : found multiple cases under same switch statement for the input symbol " ^ (Char.escaped ch)); exit 0
+    | StackCaseRedundancy symb -> print_endline ("Error : found multiple cases under same switch statement for the stack symbol " ^ (Char.escaped symb)); exit 0
     | _ -> raise e;;
 
 let rec stack_to_string stack = match stack with
