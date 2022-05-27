@@ -35,3 +35,5 @@ The program separates the word input to a pipe (`word_pipe`) to not mess with th
 - The tested word being concatenated to the residute left in the pipe (this can be avoided by manually clearing the pipe after an error, run the script `./pipe_fix`)
 
 - The program blocking for someone to read the word into the pipe, when there is no one to read (the exact same solution applies)
+
+However, `pipe_fix` being manually called my our `./run` fix, you should not have to ever use it.

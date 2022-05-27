@@ -3,6 +3,7 @@ if [ "$#" -ne 1 ]; then
     echo "Usage : ./run <file with extension and path>"
     exit 2
 else
+    ./pipe_fix
     printf "Enter a word (& for epsilon) : " && read var1
     printf "$var1" > word_pipe & ./parser < ${1}
 fi
